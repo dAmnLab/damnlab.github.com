@@ -10,15 +10,21 @@
                             <h3><a href="{0}">{1}</a><span class="tags">{2}</span></h3>\
                             <p>{3}</p></article>';
                 
-                $.ajax('projects.json').complete( handler( function( e, data ) {
-                    if( !data )
-                        return;
-                    
-                    for( index in data ) {
-                        item = data[index];
-                        $('.featured.projects .grid').append(fpt.format.apply( fpt, item ));
-                    }
-                }) );
+                function load_grid( item ) {
+                    $.ajax(item+'.json').complete( handler( function( e, data ) {
+                        if( !data )
+                            return;
+                        
+                        for( index in data ) {
+                            feature = data[index];
+                            $('.featured.'+item+' .grid').append(fpt.format.apply( fpt, feature ));
+                        }
+                    }) );
+                }
+                
+                load_grid('projects');
+                load_grid('links');
+                load_grid('developers');
             
             })( jQuery );
         </script>
@@ -37,39 +43,18 @@
                 <h2>Quick Links</h2>
                 <p>This stuff may come in handy.</p>
                 <div class="grid">
-                    <article class="featured">
-                        <h3><a href="http://github.com/dAmnLab/docs/wiki/FAQ">FAQ</a></h3>
-                        <p>
-                            Everything has a set of frequently asked questions;
-                            if you're unsure about anything, check the FAQ first.
-                        </p>
-                    </article>
-                    <article class="featured">
-                        <h3><a href="http://github.com/dAmnLab/docs/wiki/Install">Install Guide</a></h3>
-                        <p>
-                            Need help getting a bot? This guide should come in handy!
-                        </p>
-                    </article>
                 </div>
             </div>
             <div class="featured projects">
                 <h2>Featured Projects</h2>
                 <p>Here are some great projects created by members of the group.</p>
-                <div class="grid"><!--
-                    <article class="featured">
-                        <h3><a href="#cheddarpage">Chedder 2.0b4</a><span class="tags">dAmn bot, C#</span></h3>
-                        <p>
-                            Cheddar is a bot made in C#. Some more bullshit for a good description or something.
-                        </p>
-                    </article>
-                    <article class="featured">
-                        <h3><a href="http://github.com/photofroggy/dAmnViper">dAmnViper</a><span class="tags">dAmn lib, Python</span></h3>
-                        <p>
-                            dAmnViper is a Python package which provides an easy way
-                            to make applications that interact with dAmn. Requires
-                            twisted in order to work.
-                        </p>
-                    </article>-->
+                <div class="grid">
+                </div>
+            </div>
+            <div class="featured developers">
+                <h2>Developers</h2>
+                <p>If you're a developer, these links should prove useful.</p>
+                <div class="grid">
                 </div>
             </div>
         </div>

@@ -8,9 +8,8 @@ class Handler(object):
     A base class that acts as an example.
     """
     
-    def __init__(self, argparser, *args):
-        self.cmd = None
-        self.cmd = self.getcmd()
+    def __init__(self, command, argparser, *args):
+        self.cmd = command
         self.parser = argparser.add_parser(self.cmd, description=self.getdescription())
         if self.isHandler():
             self.parser.set_defaults(func=self.handle)
@@ -20,15 +19,7 @@ class Handler(object):
         """
         Override this to do stuff like hook arguments.
         """
-    
-    def getcmd(self):
-        """
-        Return the name of the command.
-        """
-        if self.cmd is None:
-            return 'command'
         
-        return self.cmd
     
     def getdescription(self):
         """

@@ -1,49 +1,77 @@
 <html>
     <head>
-        <style type="text/css">
-            body {
-                width: auto;
-                margin: 0px;
-                padding: 0px;
-                color: #2D506B;
-                font: normal 12px verdana, sans-serif;
-                line-height: 1.6em;
-                background-color: #325C68;
-            }
-            div.main {
-                background-color: white;
-                width: 600px;
-                margin: 3em auto;
-                padding: 30px 40px;
-                border-radius: 20px;
-                box-shadow: 1px 1px 40px black;
-            }
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+        <script type="text/javascript" src="lib.js"></script>
+        <script type="text/javascript">
+            ( function( $ ) {
+                
+                var fpt = '<article class="featured">\
+                            <h3><a href="{0}">{1}</a><span class="tags">{2}</span></h3>\
+                            <p>{3}</p></article>';
+                
+                $.ajax('projects.json').complete( handler( function( e, data ) {
+                    if( !data )
+                        return;
+                    
+                    for( index in data ) {
+                        item = data[index];
+                        $('.featured.projects .grid').append(fpt.format.apply( fpt, item ));
+                    }
+                }) );
             
-            div.main p {
-                margin: 1em;
-            }
-            
-            a {
-                color: #0AA8E9;
-                text-decoration: none;
-            }
-            a:hover {
-                color: #990000;
-            }
-            
-            ul {
-                list-style: none;
-                padding-left: 20px;
-            }
-        </style>
+            })( jQuery );
+        </script>
     </head>
     <body>
         <div class="main">
-            <h1>Testing Shit Out</h1>
+            <h1>Welcome to dAmnLab!</h1>
             <p>
-                Just seeing if I can get the gh-pages thing to work on dAmnLab.
-                Didn't work last time. Maybe this way?
+                dAmnLab is a group that is based around hacking <a href="http://www.deviantart.com">deviantART</a>
+                and the chat system available on the website (dAmn). On dAmn, we
+                are based in the #<a href="http://chat.deviantart.com/chat/Botdom">Botdom</a>
+                channel. If you need to know something not covered by this website
+                then come and find is in the channel.
             </p>
+            <div class="featured links">
+                <h2>Quick Links</h2>
+                <p>This stuff may come in handy.</p>
+                <div class="grid">
+                    <article class="featured">
+                        <h3><a href="http://github.com/dAmnLab/docs/wiki/FAQ">FAQ</a></h3>
+                        <p>
+                            Everything has a set of frequently asked questions;
+                            if you're unsure about anything, check the FAQ first.
+                        </p>
+                    </article>
+                    <article class="featured">
+                        <h3><a href="http://github.com/dAmnLab/docs/wiki/Install">Install Guide</a></h3>
+                        <p>
+                            Need help getting a bot? This guide should come in handy!
+                        </p>
+                    </article>
+                </div>
+            </div>
+            <div class="featured projects">
+                <h2>Featured Projects</h2>
+                <p>Here are some great projects created by members of the group.</p>
+                <div class="grid"><!--
+                    <article class="featured">
+                        <h3><a href="#cheddarpage">Chedder 2.0b4</a><span class="tags">dAmn bot, C#</span></h3>
+                        <p>
+                            Cheddar is a bot made in C#. Some more bullshit for a good description or something.
+                        </p>
+                    </article>
+                    <article class="featured">
+                        <h3><a href="http://github.com/photofroggy/dAmnViper">dAmnViper</a><span class="tags">dAmn lib, Python</span></h3>
+                        <p>
+                            dAmnViper is a Python package which provides an easy way
+                            to make applications that interact with dAmn. Requires
+                            twisted in order to work.
+                        </p>
+                    </article>-->
+                </div>
+            </div>
         </div>
     </body>
 </html>

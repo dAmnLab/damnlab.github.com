@@ -1,0 +1,24 @@
+#!/usr/bin/python
+
+import argparse
+from store import say, Archive
+
+parser = argparse.ArgumentParser(description='Remove a project from the featured projects.')
+parser.add_argument('project', help='title or index of the project to remove')
+args = parser.parse_args()
+
+arch = Archive('projects.json')
+project = args.project
+removed = False
+
+if project.isdigit():
+    removed = arch.remove( int( project ) )
+else:
+    removed = arch.removeItem( 1, project )
+
+if removed:
+    say('Removed project {0} from the archive.'.format(project))
+else:
+    say('No such project')
+
+

@@ -1,0 +1,15 @@
+#!/usr/bin/python
+# Custom shite.
+from store import say, Archive
+
+""" List the archive.
+    Shows project titles and ids.
+    Makes it so you don't have to guess indexes or whatever.
+"""
+
+say('Current posts:')
+arch = Archive('projects.json')
+
+for index, project in enumerate(arch.items):
+    say( '  {0} - {1}'.format( index, project[1] ) )
+

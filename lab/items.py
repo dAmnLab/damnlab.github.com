@@ -2,8 +2,9 @@
     Handle an item's subcommand.
 '''
 
-from lab.handle import Handler
-from lab.store import say, Archive
+from lab import say
+from lab import Archive
+from lab import Handler
 
 
 class Items(Handler):
@@ -89,6 +90,7 @@ class ItemAdd(ItemHandler):
         Handle command.
         """
         self.archive.add(args.index, [args.url, args.title, args.tags, args.description.replace('\!', '!')])
+        say('Added {0} "{1}" to the list.'.format(self.mcmd, args.title))
 
 
 class ItemRemove(ItemHandler):

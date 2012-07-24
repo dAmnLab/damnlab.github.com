@@ -3,7 +3,7 @@
 '''
 
 import argparse
-from lab.items import Items
+from lab import Items
 
 
 class Commands(object):

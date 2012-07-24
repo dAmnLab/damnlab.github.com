@@ -11,7 +11,7 @@
                             <p>{3}</p></article>';
                 
                 function load_grid( item ) {
-                    $.ajax(item+'.json').complete( handler( function( e, data ) {
+                    $.ajax('archive/'+item+'.json').complete( handler( function( e, data ) {
                         if( !data )
                             return;
                         

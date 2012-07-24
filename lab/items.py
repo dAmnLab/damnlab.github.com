@@ -36,6 +36,7 @@ class Items(Handler):
         ItemUp('up', sub, self.archive, self.cmd)
         ItemDown('down', sub, self.archive, self.cmd)
         ItemEdit('edit', sub, self.archive, self.cmd)
+        ItemShow('show', sub, self.archive, self.cmd)
     
     def getdescription(self):
         """
@@ -299,6 +300,52 @@ class ItemEdit(ItemHandler):
         self.archive.save()
         self.archive.load()
         say('Saved changes to {0} {1}.'.format(self.mcmd, index))
+
+
+class ItemShow(ItemHandler):
+    """
+    Handle the show subcommand.
+    """
+    
+    def getdescription(self):
+        """
+        Returns the command description.
+        """
+        return 'display an item'
+    
+    def arguments(self):
+        """
+        Handle arguments.
+        """
+        self.parser.add_argument('item', help=self.mcmd+' to display')
+    
+    def handle(self, args):
+        """
+        Handle command.
+        """
+        item = args.item
+        index = -1
+        items = len(self.archive.items)
+        
+        if item.isdigit():
+            index = int( item )
+            if index < 0 or index >= items:
+                say('No such {0}. There are {1} {0}s.'.format(self.mcmd, items))
+                return
+        else:
+            index = self.archive.find( 1, item )
+            if index == -1:
+                say('No such '+self.mcmd+'.')
+                say('Use `./dlab {0} list` to see archived {0}s.'.format(self.mcmd))
+                return
+        
+        item = self.archive.items[index]
+        say(self.mcmd + ' ' + str(index))
+        say('title: ' + item[1])
+        say('url: ' + item[0])
+        say('description: ' + item[3])
+        say('tags: ' + item[2])
+
 
 
 

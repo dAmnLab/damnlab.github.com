@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from commands import Commands
+from lab import Commands
 
 if __name__ == '__main__':
     Commands()

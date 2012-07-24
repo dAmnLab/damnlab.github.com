@@ -1,7 +1,7 @@
 ''' handle.py - photofroggy
     Handle different CLI commands.
 '''
-from store import say, Archive
+from lab.store import say, Archive
 
 class Handler(object):
     """

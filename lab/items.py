@@ -2,8 +2,8 @@
     Handle an item's subcommand.
 '''
 
-from handle import Handler
-from store import say, Archive
+from lab.handle import Handler
+from lab.store import say, Archive
 
 
 class Items(Handler):
@@ -21,7 +21,7 @@ class Items(Handler):
         """
         Add subcommand handlers.
         """
-        self.archive = Archive(self.cmd + 's.json')
+        self.archive = Archive('archive/'+self.cmd + 's.json')
         sub = self.parser.add_subparsers()
         self.subs(sub)
     
@@ -88,7 +88,7 @@ class ItemAdd(ItemHandler):
         """
         Handle command.
         """
-        self.archive.add(args.index, [args.url, args.title, args.tags, args.description])
+        self.archive.add(args.index, [args.url, args.title, args.tags, args.description.replace('\!', '!')])
 
 
 class ItemRemove(ItemHandler):
@@ -293,7 +293,7 @@ class ItemEdit(ItemHandler):
             args.url or item[0],
             args.title or item[1],
             args.tags or item[2],
-            args.description or item[3]]
+            (args.description or item[3]).replace('\!', '!')]
         self.archive.save()
         self.archive.load()
         say('Saved changes to {0} {1}.'.format(self.mcmd, index))

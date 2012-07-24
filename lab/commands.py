@@ -1,4 +1,4 @@
-''' commands.py - photofroggy
+''' lab.commands - photofroggy
     Process all commands.
 '''
 
